@@ -1,0 +1,11 @@
+---
+application:
+  name: "django-english-dictionary"
+  project: "first-project"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-django-english-dictionary"
+  routes:
+  - application_name: "django-english-dictionary"
+    paths:
+    - "/*"
