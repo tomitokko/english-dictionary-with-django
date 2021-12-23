@@ -19,10 +19,10 @@ body{
 .searchTerm {
   width: 100%;
   border: 3px solid #00B4CC;
-  border-right: none;
+
   padding: 5px;
   height: 20px;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px 5px 5px 5px;
   outline: none;
   color: #9DBFAF;
 }
@@ -56,7 +56,8 @@ body{
 <body>
 <div class="wrap">
    <div class="search">
-     <form action="word">
+     <form action="word" method="post">
+       {% csrf_token %}
       <input type="text" name="search" class="searchTerm" placeholder="Input Your Word Here">
       <button type="submit" class="searchButton">
         <i class="fa fa-search"></i>

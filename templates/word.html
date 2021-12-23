@@ -19,10 +19,9 @@ body{
 .searchTerm {
   width: 100%;
   border: 3px solid #00B4CC;
-  border-right: none;
   padding: 5px;
   height: 20px;
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px 5px 5px 5px;
   outline: none;
   color: #9DBFAF;
 }
@@ -51,12 +50,25 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.error{
+  color : red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top:0px;
+  margin-top:0px;
+}
+.error h5{
+  padding-top:0px;
+  margin-top:0px;  
+}
 </style>
 </head>
 <body>
 <div class="wrap">
    <div class="search">
-     <form action="word">
+     <form action="word" method="post">
+       {% csrf_token %}
       <input type="text" name="search" class="searchTerm" placeholder="Input Your Word Here">
       <button type="submit" class="searchButton">
         <i class="fa fa-search"></i>
@@ -76,5 +88,10 @@ body{
        {% endfor %}</h3>
    
 </div>
+<div class="error">
+  {% for message in messages %}
+   <h5> {{ message }} </h5>
+   {% endfor %}
+     </div>
 </body>
 </html>
