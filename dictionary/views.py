@@ -1,5 +1,6 @@
+from fnmatch import translate
 from django.shortcuts import render
-from PyDictionary import PyDictionary
+from PyMultiDictionary import MultiDictionary, DICT_EDUCALINGO
 
 # Create your views here.
 def index(request):
@@ -7,13 +8,17 @@ def index(request):
 
 def word(request):
     search = request.GET.get('search')
-    dictionary = PyDictionary()
-    meaning = dictionary.meaning(search)
-    synonyms = dictionary.synonym(search)
-    antonyms = dictionary.antonym(search)
+    dictionary = MultiDictionary(search)
+    dictionary.set_words_lang('en')
+    meaning = dictionary.get_meanings(dictionary=DICT_EDUCALINGO)
+    synonyms = dictionary.get_synonyms()
+    antonyms = dictionary.get_antonyms()
+        
     context = {
-        'meaning': meaning['Noun'][0],
-        'synonyms': synonyms,
-        'antonyms': antonyms
+        'search': search,
+        'meaning': meaning[0][0:2], # just made view for meaning from list 0 until 1
+        'synonyms': synonyms[0][0:5], # just show 5 words as synonim
+        'antonyms': antonyms[0][0:5], # just show 5 words as antonyms
     }
+
     return render(request, 'word.html', context)
